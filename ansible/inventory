@@ -1,0 +1,4 @@
+103.176.79.44
+
+[all:vars]
+ansible_user=fikri

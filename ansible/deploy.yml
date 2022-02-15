@@ -1,0 +1,32 @@
+---
+- hosts: all
+
+  vars:
+    homeDir: /home/fikri
+    appDir: "app/blog/{{ ansible_date_time.epoch }}/"
+    releaseAppDir: app/blog/release
+
+  tasks:
+    - name: Clone app repository
+      git:
+        repo: git@github.com:firefin0/blog.git
+        dest: "{{ homeDir }}{{ appDir }}"
+
+    - name: Install node modules
+      command: npm install
+      args:
+        chdir: "{{ homeDir }}/{{ appDir }}"
+
+    - name: Build app assets
+      command: npm run build
+      args:
+        chdir: "{{ homeDir }}/{{ appDir }}"
+
+    - name: Update dir symlink
+      file:
+        src: "{{ homeDir }}/{{ appDir }}"
+        dest: "{{ homeDir }}/{{ releaseAppDir }}"
+        state: link
+
+    - name: Reload pm2
+      command: pm2 reload blog
