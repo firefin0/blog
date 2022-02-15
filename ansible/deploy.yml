@@ -10,7 +10,7 @@
     - name: Clone app repository
       git:
         repo: git@github.com:firefin0/blog.git
-        dest: "{{ homeDir }}{{ appDir }}"
+        dest: "{{ homeDir }}/{{ appDir }}"
 
     - name: Install node modules
       command: npm install

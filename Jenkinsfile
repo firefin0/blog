@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Ansible') {
       steps {
-        sh 'ansible-playbook -i ansible/inventory --private-key=$ANSIBLE_PRIVATE_KEY ansible/deploy.yml'
+        sh 'ansible-playbook -i ./ansible/inventory --private-key=$ANSIBLE_PRIVATE_KEY ansible/deploy.yml'
       }
     }
   }
