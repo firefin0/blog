@@ -34,3 +34,5 @@
     
     - name: Start new pm2 process
       command: pm2 start "npm start" -n blog
+      args:
+        chdir: "{{ homeDir }}/{{ releaseAppDir }}"
