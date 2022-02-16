@@ -28,5 +28,9 @@
         dest: "{{ homeDir }}/{{ releaseAppDir }}"
         state: link
 
-    - name: Reload pm2
-      command: pm2 reload blog
+    - name: Delete old pm2 process
+      command: pm2 delete blog
+      ignore_errors: yes
+    
+    - name: Start new pm2 process
+      command: pm2 start "npm start" -n blog
